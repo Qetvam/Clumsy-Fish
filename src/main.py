@@ -1,13 +1,13 @@
 import pygame
 import sys
-import subprocess
+import lvl
 
 
 pygame.init()
 
 WIDTH, HEIGHT = 1350, 700
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Hate Game")
+pygame.display.set_caption("Clumsy Fish")
 clock = pygame.time.Clock()
 
 
@@ -18,7 +18,7 @@ TEXT_COLOR = (255, 255, 255)
 font_title = pygame.font.SysFont("lucidaconsole", 70, bold=True)
 font_button = pygame.font.SysFont("lucidaconsole", 36)
 
-menu_bg = pygame.image.load("menu_bg.png").convert()
+menu_bg = pygame.image.load("../textures/menu_bg.png").convert()
 menu_bg = pygame.transform.scale(menu_bg, (WIDTH, HEIGHT))
 
 
@@ -51,16 +51,14 @@ exit_button = Button("Выход", WIDTH // 2, HEIGHT // 2 + 90)
 
 def draw_menu():
     screen.blit(menu_bg, (0, 0))
-    title = font_title.render("Hate Game", True, TEXT_COLOR)
+    title = font_title.render("Clumsy Fish", True, TEXT_COLOR)
     screen.blit(title, title.get_rect(center=(WIDTH // 2, HEIGHT // 4)))
     start_button.draw(screen)
     exit_button.draw(screen)
 
 
 def launch_game():
-    pygame.quit()
-    subprocess.run([sys.executable, "lvl_1.py"])
-    sys.exit()
+    lvl.start_levels()
 
 
 while True:
