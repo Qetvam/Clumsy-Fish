@@ -1,7 +1,15 @@
 import pygame
 import sys
-import subprocess
 import random
+import os
+
+
+def get_texture(filename):
+    if getattr(sys, 'frozen', False):
+        base_dir = os.path.dirname(sys.executable)
+    else:
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    return os.path.join(base_dir, "textures", filename)
 
 def start_levels():
     pygame.init()
@@ -14,29 +22,29 @@ def start_levels():
     clock = pygame.time.Clock()
 
     try:
-        bg_img = pygame.image.load("../textures/level_bg.png").convert()
+        bg_img = pygame.image.load(get_texture("level_bg.png")).convert()
         bg_img = pygame.transform.scale(bg_img, (WIDTH, HEIGHT))
 
-        block_img = pygame.image.load("../textures/cave_block.png").convert_alpha()
+        block_img = pygame.image.load(get_texture("cave_block.png")).convert_alpha()
         block_img = pygame.transform.scale(block_img, (TILE_SIZE, TILE_SIZE))
 
-        plat_img = pygame.image.load("../textures/platform.png").convert_alpha()
+        plat_img = pygame.image.load(get_texture("platform.png")).convert_alpha()
         plat_img = pygame.transform.scale(plat_img, (TILE_SIZE, TILE_SIZE))
 
-        door_img = pygame.image.load("../textures/door.png").convert_alpha()
+        door_img = pygame.image.load(get_texture("door.png")).convert_alpha()
         door_img = pygame.transform.scale(door_img, (TILE_SIZE, TILE_SIZE))
 
-        spike_img = pygame.image.load("../textures/spike.png").convert_alpha()
+        spike_img = pygame.image.load(get_texture("spike.png")).convert_alpha()
         spike_img = pygame.transform.scale(spike_img, (TILE_SIZE - 8, TILE_SIZE - 16))
         spike_img_flipped = pygame.transform.flip(spike_img, False, True)
 
-        player_img = pygame.image.load("../textures/player.png").convert_alpha()
+        player_img = pygame.image.load(get_texture("player.png")).convert_alpha()
         player_img = pygame.transform.scale(player_img, (24, 28))
 
         player_img_left = player_img
         player_img_right = pygame.transform.flip(player_img, True, False)
 
-        hint_box_img = pygame.image.load("../textures/dialog_box.png").convert_alpha()
+        hint_box_img = pygame.image.load(get_texture("dialog_box.png")).convert_alpha()
         hint_box_img = pygame.transform.scale(hint_box_img, (400, 400))
 
     except pygame.error as e:

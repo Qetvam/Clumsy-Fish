@@ -1,7 +1,15 @@
 import pygame
 import sys
 import lvl
+import os
 
+
+def get_texture(filename):
+    if getattr(sys, 'frozen', False):
+        base_dir = os.path.dirname(sys.executable)
+    else:
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    return os.path.join(base_dir, "textures", filename)
 
 pygame.init()
 
@@ -18,7 +26,7 @@ TEXT_COLOR = (255, 255, 255)
 font_title = pygame.font.SysFont("lucidaconsole", 70, bold=True)
 font_button = pygame.font.SysFont("lucidaconsole", 36)
 
-menu_bg = pygame.image.load("../textures/menu_bg.png").convert()
+menu_bg = pygame.image.load(get_texture("menu_bg.png")).convert()
 menu_bg = pygame.transform.scale(menu_bg, (WIDTH, HEIGHT))
 
 
